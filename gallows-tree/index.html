@@ -15,11 +15,17 @@
 		// p.153 "JS 4 kids"
 		// create arrays with some words
 		var words = [
-			"javascpipt",
-			"rabbit",
-			"apple",
-			"monkey",
-			"yana",
+			"body",
+			"screen",
+			"table",
+			"shark",
+			"orange",
+			"pineapple",
+			"plum",
+			"carrot",
+			"meat",
+			"sky",
+			"marshmello",
 		];
 
 		// get from words[] some element(word) => word
@@ -40,7 +46,8 @@
 		// Gaming loop
 		while (remainingLetters > 0 && counterLose > 0) {
 			// Shows progress to player
-			alert("WORD - " + answerArray.join(" ") + "\nNumber of attempts : " + counterLose);
+			alert("WORD (" + word.length + "X)" + " - " + answerArray.join(" ") + "\nNumber of mistakes : " +
+				counterLose);
 
 			// Get guess from player
 			var guess = prompt("Guess a letter, or click Cancel(Отмена) to stop playing.").toLowerCase();
