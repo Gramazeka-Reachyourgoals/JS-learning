@@ -1,0 +1,43 @@
+* {
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+
+body {
+	height: 100vh;
+	background: orange;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 100vw;
+}
+
+h1,
+h2 {
+	color: #fff;
+	animation: rotation 1.8s infinite linear;
+}
+
+@keyframes rotation {
+	0% {
+		transform: rotateZ(8deg);
+	}
+
+	50% {
+		transform: rotateZ(-8deg);
+	}
+
+	100% {
+		transform: rotateZ(8deg);
+	}
+}
+
+h1 {
+	margin-top: 20vh;
+}
+
+h2 {
+	margin-top: 3vh;
+}
