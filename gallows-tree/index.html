@@ -8,7 +8,56 @@
 </head>
 
 <body>
-	<script src="script.js"></script>
+	<script>
+		// create arrays with some words
+		var words = [
+			"javascpipt",
+			"rabbit",
+			"apple",
+			"monkey",
+			"yana",
+		];
+
+		// get from words[] some element(word) => word
+		var word = words[Math.floor(Math.random() * words.length)];
+
+		// create array with _-symbols instead of letters in chosen word
+		var answerArray = [];
+		for (var i = 0; i < word.length; i++) {
+			answerArray[i] = "_";
+		}
+
+		// create parameter that will be decreasing on L numbers, if player quess the letter
+		var remainingLetters = word.length;
+
+		// Gaming loop
+		while (remainingLetters > 0) {
+			// Shows progress to player
+			alert("Your word contain this letters : " + answerArray.join(" "));
+
+			// Get guess from player
+			var guess = prompt("Guess a letter, or click Cancel(Отмена) to stop playing.");
+
+			if (guess === null) {
+				// Quit the game
+				break;
+			} else if (guess.length !== 1) {
+				alert("Please enter a single letter.");
+			} else {
+				// Reload state of game
+				for (var j = 0; j < word.length; j++) {
+					if (word[j] === guess) {
+						answerArray[j] = guess;
+						remainingLetters--;
+					}
+				}
+			}
+		}
+
+		// Congratulate the player on quessing the word
+		alert(answerArray.join(" "));
+		alert("Good job! the answer was " + word);
+	</script>
 </body>
 
 </html>
