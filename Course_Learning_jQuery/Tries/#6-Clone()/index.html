@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>jQueRYA</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+	<style>
+		#div {
+			background: green;
+			color: white;
+		}
+	</style>
+
+</head>
+
+<body>
+
+	<div id="div">
+		Block
+		<p>Paragraph</p>
+	</div>
+
+</body>
+
+<script>
+	// copy block #div
+	var block = $("#div").clone();
+
+	// block.html("<p>New paragraph</p>");
+	// block.css("font-size", "40px");
+	// block.css("width", "300px");
+
+	// add this copied block #div to <body>
+	$("body").append(block);
+</script>
+
+</html>

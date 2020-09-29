@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>jQueRYA</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+
+<body>
+
+	<div id="div">Block</div>
+
+</body>
+
+<script>
+	$("#div").css("font-size", "25vh");
+	$("#div").css("color", "red");
+	$("#div").css("width", "400px");
+
+	$("#div").css("background-color", function () {
+		return "purple";
+	});
+
+	$("#div").css("height", function () {
+		var height = prompt("Input height in pixels: ");
+		return height + "px";
+		// return width of block as string
+		// return $(this).width();
+	});
+</script>
+
+</html>

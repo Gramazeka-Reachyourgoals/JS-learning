@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>jQueRYA</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+	<style>
+		.div_1 {
+			background-color: #ef87e8;
+		}
+
+		.div_2 {
+			background-color: #f8be7e;
+		}
+	</style>
+</head>
+
+<body>
+
+	<div id="div">Text</div>
+
+</body>
+
+<script>
+	var div = prompt("1 or 2?");
+	// check correction of input
+	while (div != 1 && div != 2) {
+		alert("Choose ONLY 1 or 2!")
+		div = prompt("1 or 2?");
+	}
+	$("#div").attr("class", "div_" + div);
+	// return choosen class of div
+	alert($("#div").attr("class"));
+</script>
+
+</html>

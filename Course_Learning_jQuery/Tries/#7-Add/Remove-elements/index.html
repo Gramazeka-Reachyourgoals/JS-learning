@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>jQueRYA</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+
+<body>
+
+	<div id="div">
+		<p>Paragraph</p>
+	</div>
+	<div id="div_2"></div>
+
+	<img src="1.png">
+	<img src="2.png">
+	<img src="3.png">
+	<img src="4.png">
+	<br>
+
+	<a href="#">1</a>
+	<a href="#">2</a>
+
+</body>
+
+<script>
+	// add <span> to all <div>
+	$("div").append("<span>Just text</span>");
+
+	// add all <img> to <div id="div_2">
+	$("img").appendTo($("#div_2"));
+
+	// made only <a></a> to -> <p><a></a></p> 
+	$("a").wrap("<p></p>")
+	// $("a").wrap("<p style='display:none;'></p>")
+	// $("a").wrap("<p style='class="hrefs";'></p>")
+
+	// Distroy <div id="div">
+	$("#div").remove();
+	// Clear all child elements and text <div id="div_2">
+	$("#div_2").empty();
+
+	$("div").append("<span>Just text in span</span>");
+</script>
+
+</html>
