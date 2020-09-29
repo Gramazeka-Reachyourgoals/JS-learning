@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>jQueRYA</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+
+<body>
+
+	<form name="form" id="form">
+		<label for="female">Female</label>
+		<input id="female" type="radio" name="sex" value="female">
+		<label for="male">Male</label>
+		<input id="male" type="radio" name="sex" value="male">
+		<span id="message"></span>
+		<br><br>
+		<input id="done" onclick="return valid()" type="button" value=" DONE !">
+	</form>
+
+	<img id="img" src="1.png" style="display:none">
+
+</body>
+
+<script>
+	function valid() {
+		var state = $("input[name='sex']:checked").val();
+		if (!state) {
+			$("br:last").hide();
+			$("#message").show();
+			return $("#message").html("<font style='color: red;'><br>Choose your variant!</font>");
+		}
+		$("#message").hide();
+		$("br:last").show();
+		if (state == "male")
+			$("#img").show();
+		alert(state);
+	}
+</script>
+
+</html>
