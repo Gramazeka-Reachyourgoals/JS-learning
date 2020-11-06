@@ -18,6 +18,9 @@ document.addEventListener('DOMContentLoaded', function () {
 		formData.append('image', formImage.files[0]);
 
 		if (error === 0) {
+			// add message
+			document.getElementById('message').innerHTML = "<div><p>Dear, "+formName.value+" your message is successfully sent!<br>Our shop very soon call you =)</p></div>";
+
 			// send email to post
 
 			// while sending data info to email add loading gif
@@ -33,12 +36,19 @@ document.addEventListener('DOMContentLoaded', function () {
 			if (response.ok) {
 				let result = await response.json();
 				// shows this response to user
-				alert(result.message);
+				// alert(result.message);
 				// clear all form fields
 				formPreview.innerHTML = '';
 				form.reset();
 				// hiding loading
 				form.classList.remove('_sending');
+				
+				// MESSAGE
+				document.getElementById('message').id='message_active';
+				document.getElementById('message_active').addEventListener('click', function () {
+					document.getElementById('message_active').id='message';
+				})
+
 			} else {
 				alert("Error");
 				form.classList.remove('_sending');

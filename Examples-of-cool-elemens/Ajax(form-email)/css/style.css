@@ -43,6 +43,10 @@ body {
 
 /* ----------- */
 
+.wrapper {
+	padding: 0 15px;
+}
+
 .form {
 	max-width: 550px;
 	margin: 0 auto;
@@ -60,7 +64,7 @@ body {
 
 .form__body:after {
 	content: '';
-	position: absolute;
+	position: fixed;
 	top: 0;
 	left: 0;
 	width: 100%;
@@ -74,6 +78,42 @@ body {
 .form__body._sending:after {
 	opacity: 1;
 	visibility: visible;
+}
+
+#message {
+	display: none;
+}
+
+#message_active {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: fixed;
+	background: rgba(85, 85, 85, 0.9);
+	height: 100%;
+	width: 100%;
+	top: 0;
+	left: 0;
+	z-index: 1;
+}
+
+#message_active>div {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 25%;
+	margin: 0 auto;
+	padding: 0 30px;
+	border-radius: 20px;
+	background: #fff;
+	color: #000;
+	font-size: 20px;
+	cursor: pointer;
+}
+
+#message_active p {
+	text-align: center;
+	line-height: 140%;
 }
 
 .form__title {
@@ -171,11 +211,12 @@ textarea.form__input {
 	position: absolute;
 	top: 0;
 	left: 0;
-	width: 100%;
+	width: 89px;
 	height: 100%;
 	opacity: 0;
 	font-size: 0;
 	cursor: pointer;
+	border-radius: 30px;
 }
 
 .file__button {
