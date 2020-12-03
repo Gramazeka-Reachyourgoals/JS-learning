@@ -1,0 +1,16 @@
+body {
+	margin: 0;
+	font-family: serif;
+	height: 100vh;
+}
+
+section {
+	height: 100vh;
+	text-align: center;
+}
+
+.box {
+	background: red;
+	width: 200px;
+	height: 200px;
+}

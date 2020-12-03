@@ -1,0 +1,35 @@
+body {
+  margin: 200px 0;
+  font-family: serif;
+  height: 100vh;
+  overflow-x: hidden;
+  height: auto;
+}
+
+section {
+  height: 70vh;
+  text-align: center;
+}
+
+section:nth-of-type(2) {
+  height: 50vh;
+}
+
+.box {
+  background: red;
+  width: 150px;
+  height: 150px;
+}
+
+.box-a {
+  background: cyan;
+}
+
+.box-b {
+  background: orange;
+}
+
+.box-c {
+  background: green;
+}
+/*# sourceMappingURL=main.css.map */

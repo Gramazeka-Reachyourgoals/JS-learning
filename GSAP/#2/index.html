@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>GSAP tutorial</title>
+
+	<link rel="stylesheet" href="main.css">
+</head>
+
+<body>
+
+	<section>
+		<h1>Scrooll down</h1>
+	</section>
+	<section class="dark">
+		<div class="content">
+			<h2>Deam!!! How did yo' do that?!</h2>
+			<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit, sed.</p>
+		</div>
+		<img src="img/photo.jpg" alt="staff">
+	</section>
+	<section></section>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/ScrollTrigger.min.js"></script>
+
+	<script>
+
+		let tl = gsap.timeline({
+			scrollTrigger:{
+				// element that will request of scroll
+				trigger: '.dark',
+				// center of height of .dark block will move when
+				// bottom of scrollbar touch it(center of height .dark)
+				start: 'center bottom'
+			}
+		})
+
+		// move img right to 200px, from opacity 0 by 1.5sec
+		tl.from('img', {x: 200, opacity: 0, duration: 1.5})
+			// move .content vertically 300px from opacity 0 duration 1 sec
+			// earlier than previous animation ends for 1 sec
+			.from('.content',{y:300,opacity:0,duration:1}, '-=1')
+
+
+		// gsap.to('#properties .article:first-of-type', {
+	// 	scrollTrigger: {
+	// 		trigger: '#properties .article:first-of-type',
+	// 		toggleActions: "restart none none none",
+	// 		// toggleActions: "play none none none",
+	// 	},
+	// 	x:400,
+	// 	// rotation: 360,
+	// 	opacity: 0,
+	// 	duration: 1,
+	// });
+
+	gsap.from('#properties .article:first-of-type', {
+		scrollTrigger: {
+			// what to animate & how it goes
+			trigger: '#properties .article:first-of-type',
+
+			// start&end positions of height of anim element
+			// center of height of .dark block will move when
+			// bottom of scrollbar touch it(center of height .dark)
+			// top,center,bottom,px,%(relative to top)
+			start: 'top 70%',
+			// end: () => '+=' + $('#properties .article:first-of-type').outerWidth(),
+			// end line +300px down from start line of anim
+			end: '+=300 30%',
+			// end: 'bottom 30%',
+			// start: 'top center',
+
+			// as we scroll as block move through anim
+			// if it number => than it delay to this move for 1=>1sec
+			scrub: 1,
+
+			// shows help markers on markup
+			markers: 'true',
+
+			// what to do:
+			// 1-if scroller-start pass by start line of anim
+			// 2-if scroller-end down pass by end line of anim
+			// 3-if scroller-end up pass by end line of anim
+			// 4-if scroller-start up pass by start line of anim
+			// 4(pause, reset - good)
+			toggleActions: "restart none none reset",
+			// toggleActions: "restart pause reverse pause",
+			// toggleActions: "restart pause resume none",
+			// toggleActions: "restart pause none none",
+			// toggleActions: "play none none none",
+		},
+		// what animation exactly will happen
+		x: -300,
+		// rotation: 360,
+		opacity: 0,
+		duration: 1.2,
+	});
+
+	// gsap.from('.ghost', {
+	// 	scrollTrigger: {
+	// 		trigger: '#properties .article:first-of-type',
+	// 		start: 'top 70%',
+	// 		end: '+=300 30%',
+	// 		markers: 'true',
+	// 		scrub: true
+	// 	},
+	// 	x: 300,
+	// 	opacity: 0,
+	// 	duration: 1.2
+	// });
+
+	</script>
+
+</body>
+
+</html>

@@ -1,0 +1,51 @@
+body {
+  margin: 0;
+  font-family: serif;
+  height: 100vh;
+  overflow-x: hidden;
+}
+
+section {
+  height: 100vh;
+  text-align: center;
+}
+
+.box {
+  background: red;
+  width: 200px;
+  height: 200px;
+}
+
+.dark {
+  text-align: left;
+  background: #752b68;
+  color: #fff;
+  position: relative;
+}
+
+img {
+  width: 50%;
+  height: 100vh;
+  position: absolute;
+  -o-object-fit: contain;
+     object-fit: contain;
+  top: 0;
+  right: 0;
+  z-index: 0;
+}
+
+.content {
+  padding: 9em 5em;
+  z-index: 1;
+  position: relative;
+}
+
+.content h2 {
+  font-size: 5em;
+  margin-bottom: 0;
+}
+
+.content p {
+  font-size: 1.6em;
+}
+/*# sourceMappingURL=main.css.map */

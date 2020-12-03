@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>GSAP tutorial</title>
+
+	<link rel="stylesheet" href="main.css">
+</head>
+
+<body>
+
+	<section><div class="box box-a"></div></section>
+	<section><div class="box box-b"></div></section>
+	<section><div class="box box-c"></div></section>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/ScrollTrigger.min.js"></script>
+
+	<script>
+
+		let tl = gsap.timeline({
+			scrollTrigger: {
+				trigger: '.box-c',
+				start: 'top center',
+				end: 'bottom 30%',
+				markers: 'true',
+				scrub: true,
+				// when scroller-start pass by start line(.box-b pinning on
+				// his place) & until scrolled-end pass by end line
+				// while .box-c animating => .box-b will be pinned
+				pin: '.box-b',
+				// pin element to scroller-start(it will moves diagonally)
+				// pin: true,
+			}
+		});
+
+		tl.to('.box-c',{
+			x: 600,
+			rotation: 360,
+			ease: 'none',
+			duration: 3,
+		})
+
+		// .to('.box-c',{
+		// 	backgroundColor: 'purple',
+		// 	duration: 1
+		// })
+
+		// .to('.box-c',{
+		// 	x: 0,
+		// 	duration: 1,
+		// })
+
+	</script>
+
+</body>
+
+</html>
