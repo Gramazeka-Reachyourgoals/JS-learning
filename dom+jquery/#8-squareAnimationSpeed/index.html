@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>animation</title>
+	<style>
+		h1 {
+			display: inline-block;
+			background: orange;
+			cursor: pointer;
+			user-select: none;
+		}
+
+		h1:hover {
+			background: red;
+
+		}
+	</style>
+</head>
+
+<body>
+	<h1 id="head"></h1>
+	<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+	<script>
+		var offsetX = 400;
+		var offsetY = 100;
+
+		function move() {
+			$('#head').offset({
+				left: offsetX
+			});
+			$('#head').offset({
+				top: offsetY
+			});
+
+			// right
+			if (offsetX >= 400 && offsetY == 100) {
+				offsetX++;
+
+				if (offsetX > 800) {
+					offsetX = 800;
+					offsetY = 101
+				};
+			}
+			// down
+			if (offsetY > 100 && offsetX == 800) {
+				offsetY++;
+
+				if (offsetY > 400) {
+					offsetY = 400
+				}
+			}
+			// left
+			if (offsetX <= 800 && offsetY == 400) {
+				offsetX--;
+
+				if (offsetX < 400) {
+					offsetX = 400
+				};
+			}
+			// up
+			if (offsetX == 400 && offsetY <= 400) {
+				offsetY--;
+
+				if (offsetY < 100) {
+					offsetY = 100
+					console.log(false);
+				}
+			}
+		}
+
+		var intervalId = setInterval(move, 30);
+
+		var counter = 0;
+		$('#head').html('Try click on me 10 times :D');
+		$('#head').css({ 'padding': '20px 40px', 'border': 'none' });
+		$('h1').click(function (event) {
+			counter++;
+			clearInterval(intervalId);
+			intervalid = setInterval(move, 23);
+
+			$('#head').html('' + counter + 'X');
+
+			if (counter == 10) {
+				clearInterval(intervalId);
+				$('#head').css({ 'padding': '40px', 'border': '3px dashed red' });
+				$('#head').html('YOU WIN!');
+				counter = 0;
+			}
+		})
+
+	</script>
+</body>
+
+</html>
