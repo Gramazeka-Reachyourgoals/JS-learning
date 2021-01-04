@@ -4,7 +4,8 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Trying DOM</title>
+	<title>DrawLinesFromArray</title>
+
 	<style>
 		* {
 			margin: 0;
@@ -26,12 +27,28 @@
 </head>
 
 <body>
-	<canvas id="canvas" width="400" height="400"></canvas>
+	<canvas id="canvas"></canvas>
+
 	<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 	<script>
+		var counter = 0;
+		// dynamic change of size of canvas, through size of device
+		$(window).on('load resize', function () {
+			$('#canvas').attr({
+				width: $(window).width() + 'px',
+				height: $(window).height() + 'px'
+			});
+			if (counter == 0) {
+				start();
+				counter++;
+			}
+		})
 
-		var canvas = document.getElementById('canvas');
-		var ctx = canvas.getContext('2d');
+		function start() {
+
+
+
+		}
 
 	</script>
 </body>

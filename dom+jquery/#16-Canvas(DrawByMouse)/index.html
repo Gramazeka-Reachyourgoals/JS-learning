@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Gallows-tree+Canvas</title>
+
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+		}
+
+		body {
+			width: max-content;
+			height: max-content;
+		}
+
+		canvas {
+			display: block;
+		}
+	</style>
+</head>
+
+<body>
+	<canvas id="canvas"></canvas>
+
+	<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+	<script>
+		var counter = 0;
+		// dynamic change of size of canvas, through size of device
+		$(window).on('load resize', function () {
+			$('#canvas').attr({
+				width: $(window).width() + 'px',
+				height: $(window).height() + 'px'
+			});
+			if (counter == 0) {
+				start();
+				counter++;
+			}
+		})
+
+		function start() {
+
+			$('html').click(function (k) {
+				$('#canvas').mousemove(function (e) {
+					var canvas = document.getElementById('canvas');
+					var ctx = canvas.getContext('2d');
+					ctx.beginPath();
+					ctx.arc(e.pageX, e.pageY, 3, 0, Math.PI * 2, false);
+					ctx.fill();
+					$('#canvas').click(function (k) {
+						var canvas = document.getElementById('canvas');
+						var ctx = canvas.getContext('2d');
+						ctx.clearRect(0, 0, canvas.width, canvas.height);
+					})
+				})
+			})
+
+		}
+
+	</script>
+</body>
+
+</html>

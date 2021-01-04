@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>SnowMan at some place</title>
+
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+		}
+
+		body {
+			width: max-content;
+			height: max-content;
+		}
+
+		canvas {
+			display: block;
+		}
+	</style>
+</head>
+
+<body>
+	<canvas id="canvas"></canvas>
+
+	<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+	<script>
+		var counter = 0;
+
+		// dynamic change of size of canvas, through size of device
+		$(window).on('load resize', function () {
+			$('#canvas').attr({
+				width: $(window).width() + 'px',
+				height: $(window).height() + 'px'
+			});
+			if (counter == 0) {
+				drawSnowMan(0, 0);
+				counter++;
+			}
+		})
+
+		// draw snowmans everywhere
+		var canvas = document.getElementById('canvas');
+		var ctx = canvas.getContext('2d');
+
+		function drawSnowMan(x1, y1) {
+			// fn 4 simplifing of drawing of circle
+			function circle(x, y, radius, fill) {
+				ctx.beginPath();
+				ctx.arc(x, y, radius, 0, Math.PI * 2, false);
+				if (fill == true) {
+					ctx.fill();
+				} else if (fill == false) {
+					ctx.stroke();
+				}
+			}
+
+			ctx.lineWidth = 4;
+
+			circle(x1 + 100, y1 + 55, 40, false);
+			circle(x1 + 100, y1 + 155, 60, false);
+
+			ctx.fillStyle = 'Orange';
+			circle(x1 + 100, y1 + 55, 6, true);
+			ctx.fillStyle = "black";
+			circle(x1 + 82, y1 + 40, 6, true);
+			circle(x1 + 118, y1 + 40, 6, true);
+
+			circle(x1 + 100, y1 + 120, 6, true);
+			circle(x1 + 100, y1 + 155, 6, true);
+			circle(x1 + 100, y1 + 190, 6, true);
+		}
+		// drawSnowMan(0, 0); - use for painting
+
+	</script>
+</body>
+
+</html>

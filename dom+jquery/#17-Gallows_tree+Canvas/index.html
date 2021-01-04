@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Gallows-tree+Canvas</title>
+	<link rel="stylesheet" href="main.css">
+</head>
+
+<body>
+	<canvas id="canvas" width="200" height="200"></canvas>
+	<h1>Gallows-tree game + Canvas</h1><br>
+	<h2>v.1.1</h2>
+
+	<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+	<script>
+		var canvas = document.getElementById('canvas');
+		var ctx = canvas.getContext('2d');
+
+		// create arrays with some words
+		var words = [
+			"body",
+			"screen",
+			"table",
+			"shark",
+			"orange",
+			"pineapple",
+			"plum",
+			"carrot",
+			"meat",
+			"sky",
+			"marshmello",
+		];
+
+		// get from words[] some element(word) => word
+		var word = words[Math.floor(Math.random() * words.length)];
+
+		// create array with _-symbols instead of letters in chosen word
+		var answerArray = [];
+		for (var i = 0; i < word.length; i++) {
+			answerArray[i] = "_";
+		}
+
+		// create parameter that will be decreasing on letter numbers, if player quess the letter
+		var remainingLetters = word.length;
+
+		// create counter of limit tries of guessing
+		var counterLose = 5;
+
+		$(document).ready(function () {
+
+			// Gaming loop
+			while (remainingLetters > 0 && counterLose > 0) {
+				// Shows progress to player
+				alert("WORD (" + word.length + "X)" + " - " + answerArray.join(" ") + "\nNumber of mistakes : " +
+					counterLose);
+
+				// Get guess from player
+				var guess = prompt("Guess a letter, or click Cancel(Отмена) to stop playing.").toLowerCase();
+
+				if (guess === null) {
+					// Quit the game
+					break;
+				} else if (guess.length !== 1) {
+					alert("Please enter a single letter.");
+				} else {
+					// Reload state of game
+					var i = 0;
+					for (var j = 0; j < word.length; j++) {
+						if (word[j] === guess) {
+							// fix of bag - same letter guessing
+							if (answerArray[j] === "_") {
+								answerArray[j] = guess;
+								remainingLetters--;
+							}
+							i++;
+						}
+						drawLose(counterLose);
+					}
+					// Add system of only 5 lifes
+					if (i == 0) {
+						counterLose--;
+						drawLose(counterLose);
+					}
+					if (counterLose == 0) {
+						alert("You lose!");
+					}
+				}
+			}
+
+			// Congratulate the player on quessing the word
+			alert(answerArray.join(" "));
+			alert("Good job! the answer was " + word);
+
+			function drawLose(counterLose) {
+				ctx.lineWidth = 5;
+				switch (counterLose) {
+					case 5:
+						// head
+						ctx.strokeRect(80, 10, 40, 40);
+						ctx.beginPath();
+						break;
+					case 4:
+						// body
+						ctx.moveTo(100, 50);
+						ctx.lineTo(100, 130);
+						ctx.stroke();
+						break;
+					case 3:
+						// left leg
+						ctx.moveTo(100, 130);
+						ctx.lineTo(60, 180);
+						ctx.stroke();
+						break;
+					case 2:
+						// right leg
+						ctx.moveTo(100, 130);
+						ctx.lineTo(140, 180);
+						ctx.stroke();
+						break;
+					case 1:
+						// left hand
+						ctx.moveTo(60, 50);
+						ctx.lineTo(100, 80);
+						ctx.stroke();
+						break;
+					case 0:
+						// right hand
+						ctx.moveTo(140, 50);
+						ctx.lineTo(100, 80);
+						ctx.stroke();
+						break;
+				}
+			}
+		})
+	</script>
+</body>
+
+</html>

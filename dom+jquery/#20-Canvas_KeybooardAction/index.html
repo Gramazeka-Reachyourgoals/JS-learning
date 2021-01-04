@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Control of Ball</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+		}
+
+		body {
+			width: 100vw;
+			height: 100vh;
+			display: flex;
+			flex-direction: column;
+			justify-content: space-evenly;
+			align-items: center;
+		}
+
+		canvas {
+			display: block;
+		}
+	</style>
+</head>
+
+<body>
+	<canvas id="canvas" width="400" height="400"></canvas>
+	<h1>Controls with keyboard</h1>
+	<p>Numbers from 1(low) to 9(high) - SPEED</p>
+	<p>Arrows - CONTROLS FOR MOVING</p>
+	<p>Space - STOP</p>
+	<p>Z - SPEED DOWN, X - SPEED UP</p>
+	<p>C - SIZE DOWN, V - SIZE UP</p>
+	<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+	<script>
+
+		var canvas = document.getElementById('canvas');
+		var ctx = canvas.getContext('2d');
+		ctx.fillStyle = 'DarkOrchid';
+
+		// allow use parameter from html, so if you want to change
+		// size of canvas, u can change it only in html
+		var width = canvas.width;
+		var height = canvas.height;
+
+		// draw circle
+		function circle(x, y, radius, fillCircle) {
+			ctx.beginPath();
+			ctx.arc(x, y, radius, 0, Math.PI * 2, false);
+			if (fillCircle) {
+				ctx.fill()
+			} else {
+				ctx.stroke()
+			}
+		}
+
+		// create CONSTRUCTOR(basis of creating objects) for ball object
+		function Ball() {
+			this.x = width / 2;
+			this.y = height / 2;
+			this.xSpeed = 5;
+			this.ySpeed = 0;
+			this.speed = 5;
+			this.size = 10;
+		}
+
+		// add method move() to prototype of constructor Ball()
+		// change coordinates of next circle
+		Ball.prototype.move = function () {
+			// check for stopping ball if speed is 0
+			if (this.speed == 0) {
+				this.x += this.speed;
+				this.y += this.speed;
+			} else {
+				this.x += this.xSpeed;
+				this.y += this.ySpeed;
+			}
+
+			// bouncing from walls
+			if (this.x < 0) {
+				this.xSpeed = this.speed;
+			} else if (this.x > width) {
+				this.xSpeed = -this.speed;
+			}
+			if (this.y < 0) {
+				this.ySpeed = this.speed;
+			} else if (this.y > height) {
+				this.ySpeed = -this.speed;
+			}
+
+			// go through walls
+			// if (this.x < 0) {
+			// 	this.x = width;
+			// } else if (this.x > width) {
+			// 	this.x = 0
+			// }
+			// if (this.y < 0) {
+			// 	this.y = height
+			// } else if (this.y > height) {
+			// 	this.y = 0
+			// }
+		}
+
+		// add method draw() to prototype of constructor Ball()
+		// draw circle
+		Ball.prototype.draw = function () {
+			circle(this.x, this.y, this.size, true)
+		}
+
+		// add method setDirection() to prototype of constructor Ball()
+		// change xSpeed & ySpeed of object depending on the key pressed
+		Ball.prototype.setDirection = function (direction) {
+			if (direction === 'up') {
+				this.xSpeed = 0;
+				this.ySpeed = -this.speed;
+			} else if (direction === 'down') {
+				this.xSpeed = 0;
+				this.ySpeed = this.speed;
+			} else if (direction === 'left') {
+				this.xSpeed = -this.speed;
+				this.ySpeed = 0;
+			} else if (direction === 'right') {
+				this.xSpeed = this.speed;
+				this.ySpeed = 0;
+			} else if (direction === 'stop') {
+				this.xSpeed = 0;
+				this.ySpeed = 0;
+			}
+		}
+
+		// create object
+		var ball = new Ball();
+
+		var keyActions = {
+			32: 'stop',
+			37: 'left',
+			38: 'up',
+			39: 'right',
+			40: 'down'
+		}
+
+		// set speed of moving by keyboard numbers 1-9
+		var speeds = {
+			49: 5,
+			50: 10,
+			51: 20,
+			52: 40,
+			53: 60,
+			54: 80,
+			55: 100,
+			56: 120,
+			57: 140,
+		}
+
+		// Handler of keydown event
+		$('body').keydown(function (e) {
+			// set speed of moving by keyboard numbers 1-9
+			if (speeds[e.keyCode] != undefined) {
+				ball.speed = speeds[e.keyCode];
+			}
+
+			// TODO: stop not at the place
+			// change speed of ball with button "x" "z"
+			// z=90, x=88
+			// X = speed UP
+			if (e.keyCode == 88) {
+				if (ball.speed >= 0) {
+					ball.speed += 5;
+				}
+				// Z = speed DOWN
+			} else if (e.keyCode == 90) {
+				if (ball.speed > 0) {
+					ball.speed -= 5;
+				}
+			}
+
+			// change size of ball with button "c" "v"
+			// c=67, v=86
+			// V = size UP
+			if (e.keyCode == 86) {
+				if (ball.size >= 0) {
+					ball.size += 5;
+				}
+				// C = size DOWN
+			} else if (e.keyCode == 67) {
+				if (ball.size > 0) {
+					ball.size -= 5;
+				}
+			}
+
+			var direction = keyActions[e.keyCode];
+			ball.setDirection(direction);
+		})
+
+		// Animation
+		setInterval(function () {
+			ctx.clearRect(0, 0, width, height);
+
+			ball.draw();
+			ball.move();
+
+			ctx.strokeStyle = 'Red';
+			ctx.strokeRect(0, 0, width, height);
+		}, 30)
+
+	</script>
+</body>
+
+</html>

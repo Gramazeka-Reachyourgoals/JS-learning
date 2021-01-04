@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Canvas_SnowMan</title>
+
+	<style>
+		body {
+			width: 200px;
+			margin: 0 auto;
+		}
+
+		h2 {
+			text-align: center;
+			margin: 0;
+			padding: 0;
+		}
+
+		canvas {
+			margin: 100px auto;
+		}
+
+		#canvas1,
+		#canvas2 {
+			margin: 0 auto;
+		}
+	</style>
+</head>
+
+<body>
+	<canvas id="canvas" width="200" height="250"></canvas>
+
+	<script>
+
+		var canvas = document.getElementById('canvas');
+		var ctx = canvas.getContext('2d');
+
+		// fn 4 simplifing of drawing of circle
+		function circle(x, y, radius, fill) {
+			ctx.beginPath();
+			ctx.arc(x, y, radius, 0, Math.PI * 2, false);
+			if (fill == true) {
+				ctx.fill();
+			} else if (fill == false) {
+				ctx.stroke();
+			}
+		}
+
+		ctx.lineWidth = 4;
+
+		circle(100, 55, 50, false);
+		circle(100, 175, 70, false);
+
+		ctx.fillStyle = 'Orange';
+		circle(100, 55, 8, true);
+		ctx.fillStyle = "black";
+		circle(82, 40, 8, true);
+		circle(118, 40, 8, true);
+		circle(100, 140, 8, true);
+		circle(100, 175, 8, true);
+		circle(100, 210, 8, true);
+
+	</script>
+</body>
+
+</html>

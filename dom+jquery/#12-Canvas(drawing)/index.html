@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Canvas_Ihor</title>
+
+	<style>
+		body {
+			width: max-content;
+			margin: 0 auto;
+		}
+
+		h2 {
+			text-align: center;
+			margin: 0;
+			padding: 0;
+		}
+
+		canvas {
+			margin: 20px auto;
+			display: block;
+		}
+
+		#canvas1,
+		#canvas2,
+		#canvas3,
+		#canvas4 {
+			margin: 0 auto;
+		}
+	</style>
+</head>
+
+<body>
+	<canvas id="canvas" width="70" height="70"></canvas>
+	<canvas id="canvas1" width="200" height="200"></canvas>
+	<canvas id="canvas2" width="100" height="100"></canvas>
+	<canvas id="canvas3" width="125" height="70"></canvas>
+	<canvas id="canvas4" width="140" height="140"></canvas>
+
+	<!-- <script src="https://code.jquery.com/jquery-3.5.1.js"></script> -->
+	<script>
+
+		// Cross
+		var canvas = document.getElementById('canvas');
+		var ctx = canvas.getContext('2d');
+
+		// style 4 line
+		ctx.strokeStyle = 'Turquoise';
+		ctx.lineWidth = 4;
+		// set move of drawing
+		ctx.beginPath();
+		ctx.moveTo(10, 10);
+		ctx.lineTo(60, 60);
+		ctx.moveTo(60, 10);
+		ctx.lineTo(10, 60);
+		// draw picture out of path(set before)
+		ctx.stroke();
+
+		// Stick Man
+		var canvas1 = document.getElementById('canvas1');
+		var ctx1 = canvas1.getContext('2d');
+
+		ctx1.lineWidth = 5;
+		// head
+		ctx1.strokeRect(80, 10, 40, 40);
+		ctx1.beginPath();
+		// body
+		ctx1.moveTo(100, 50);
+		ctx1.lineTo(100, 130);
+		// left leg
+		ctx1.moveTo(100, 130);
+		ctx1.lineTo(60, 180);
+		// right leg
+		ctx1.moveTo(100, 130);
+		ctx1.lineTo(140, 180);
+		// left hand
+		ctx1.moveTo(60, 50);
+		ctx1.lineTo(100, 80);
+		// right hand
+		ctx1.moveTo(140, 50);
+		ctx1.lineTo(100, 80);
+		ctx1.stroke();
+
+		// House
+		var canvas2 = document.getElementById('canvas2');
+		var ctx2 = canvas2.getContext('2d');
+
+		ctx2.fillStyle = 'GoldenRod';
+
+		ctx2.beginPath();
+		ctx2.moveTo(20, 80);
+		ctx2.lineTo(20, 40);
+		ctx2.lineTo(50, 10);
+		ctx2.lineTo(80, 40);
+		ctx2.lineTo(80, 80);
+		ctx2.lineTo(20, 80);
+		// draw outline and fill in with color
+		ctx2.fill();
+
+		// Circle and arcs(arc-part of circle)
+		var canvas3 = document.getElementById('canvas3');
+		var ctx3 = canvas3.getContext('2d');
+
+		ctx3.lineWidth = 2;
+		ctx3.strokeStyle = 'Green';
+
+		ctx3.beginPath();
+		// allow to draw circle or part of circle(arc)
+		// x1,y1 coordinates of center of circle (x1,y1,radius,start angle,finish angle,true-counterclock-wise drawing, false-clockwise drawing)
+		ctx3.arc(0, 30, 20, 0, Math.PI / 2, true);
+		// ctx3.moveTo(00, 10);
+		// ctx3.lineTo(10, 40);
+		ctx3.stroke();
+
+		ctx3.beginPath();
+		ctx3.arc(50, 30, 20, 0, Math.PI, false);
+		ctx3.stroke();
+
+		ctx3.beginPath();
+		ctx3.arc(100, 30, 20, 0, Math.PI * 2, false);
+		ctx3.stroke();
+
+		// Сoncentric circles
+		var canvas4 = document.getElementById('canvas4');
+		var ctx4 = canvas4.getContext('2d');
+
+		// fn 4 simplifing of drawing of circle
+		function circle(x, y, radius) {
+			ctx4.beginPath();
+			ctx4.arc(x, y, radius, 0, Math.PI * 2, false);
+			ctx4.stroke();
+		}
+
+		ctx4.lineWidth = 4;
+		var coo = 70;
+
+		ctx4.strokeStyle = 'Fuchsia';
+		circle(coo, coo, 10);
+		ctx4.strokeStyle = 'red';
+		circle(coo, coo, 20);
+		ctx4.strokeStyle = 'yellow';
+		circle(coo, coo, 30);
+		ctx4.strokeStyle = 'green';
+		circle(coo, coo, 40);
+		ctx4.strokeStyle = 'blue';
+		circle(coo, coo, 50);
+		ctx4.strokeStyle = 'purple';
+		circle(coo, coo, 60);
+
+	</script>
+</body>
+
+</html>

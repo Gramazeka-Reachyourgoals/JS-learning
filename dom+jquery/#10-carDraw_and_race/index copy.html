@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Trying DOM</title>
+</head>
+
+<body>
+	<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+	<script>
+		function Car(x, y) {
+			this.x = x;
+			this.y = y;
+			this.speed = 20;
+			// draw at once when we create new Car()
+			this.draw()
+		};
+
+		Car.prototype.draw = function () {
+			var carHtml = '<img src="https://nostarch.com/images/car.png">';
+
+			this.carElement = $(carHtml);
+			this.carElement.css({
+				position: 'absolute',
+				left: this.x,
+				top: this.y
+			});
+
+			$('body').append(this.carElement);
+		};
+
+		Car.prototype.moveRight = function (distance) {
+			this.x += distance;
+
+			this.carElement.css({
+				left: this.x,
+				top: this.y
+			})
+		};
+
+		Car.prototype.moveLeft = function () {
+			this.x -= this.speed;
+
+			this.carElement.css({
+				left: this.x,
+				top: this.y
+			})
+		};
+
+		Car.prototype.moveUp = function () {
+			this.y -= this.speed;
+
+			this.carElement.css({
+				left: this.x,
+				top: this.y
+			})
+		};
+
+		Car.prototype.moveDown = function () {
+			this.y += this.speed;
+
+			this.carElement.css({
+				left: this.x,
+				top: this.y
+			})
+		};
+
+		var tesla = new Car(20, 20);
+		var nissan = new Car(100, 100);
+
+		// ride cars
+		// setInterval(function(){nissan.moveRight(50)}, 50);
+	</script>
+</body>
+
+</html>

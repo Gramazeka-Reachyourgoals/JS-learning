@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Bouncing Ball</title>
+</head>
+
+<body>
+	<canvas id="canvas" width="500" height="500"></canvas>
+	<script>
+
+		// create CONSTRUCTOR(basis of creating objects) for ball object
+		function Ball() {
+			this.x = width / 2;
+			this.y = height / 2;
+			// this.xSpeed = -2;
+			// this.ySpeed = 3;
+
+			// choose random color 4 balls
+			var colors = ['Gold', 'Blue', 'Green', 'Purple', 'Red', 'Orange'];
+			this.color = colors[Math.floor(Math.random() * colors.length)];
+
+			// add random speed of changing of coordinates(option)
+			this.xSpeed = Math.random() * 10 - 5;
+			this.ySpeed = Math.random() * 10 - 5;
+		}
+
+		// draw circle
+		function circle(x, y, radius, fillCircle) {
+			ctx.beginPath();
+			ctx.arc(x, y, radius, 0, Math.PI * 2, false);
+			if (fillCircle) {
+				ctx.fill()
+			} else {
+				ctx.stroke()
+			}
+		}
+
+		// add method draw() to prototype of constructor Ball()
+		// draw circle
+		Ball.prototype.draw = function () {
+
+			// set random color 4 ball
+			ctx.fillStyle = this.color;
+			// draw this ball
+			circle(this.x, this.y, 5, true)
+		}
+
+		// add method move() to prototype of constructor Ball()
+		// change coordinates of next circle
+		Ball.prototype.move = function () {
+			this.x += this.xSpeed;
+			this.y += this.ySpeed;
+		}
+
+		// add method checkCollision() to prototype of constructor Ball()
+		// check & change direction of moving after collision with walls
+		Ball.prototype.checkCollision = function () {
+			if (this.x < 0 || this.x > width) {
+				this.xSpeed = -this.xSpeed;
+			}
+			if (this.y < 0 || this.y > height) {
+				this.ySpeed = -this.ySpeed;
+			}
+
+			this.x += this.xSpeed;
+			this.y += this.ySpeed;
+		}
+
+		var canvas = document.getElementById('canvas');
+		var ctx = canvas.getContext('2d');
+
+		// allow use parameter from html, so if you want to change
+		// size of canvas, u can change it only in html
+		var width = canvas.width;
+		var height = canvas.height;
+
+		// animate 4 10 balls
+		var ballsArray = [];
+		for (let i = 0; i < 10; i++) {
+			ballsArray.push(new Ball())
+		}
+
+		// create new object(by using constructor Ball()) ball
+		// animate 4 1 ball
+		// var ball = new Ball();
+
+		setInterval(function () {
+			// clear canvas
+			ctx.clearRect(0, 0, width, height);
+
+			// animate 4 1 ball
+			// ball.draw();
+			// ball.move();
+			// ball.checkCollision();
+
+			// animate 4 10 balls
+			for (let i = 0; i < 10; i++) {
+				ballsArray[i].draw();
+				ballsArray[i].move();
+				ballsArray[i].checkCollision();
+			}
+
+			// draw frame of canvas
+			ctx.strokeRect(0, 0, width, height);
+		}, 30)
+
+	</script>
+</body>
+
+</html>

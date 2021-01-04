@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Flying Bee</title>
+</head>
+
+<body>
+	<canvas id="canvas" width="200" height="200"></canvas>
+	<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+	<script>
+		// draw circle
+		function circle(x, y, radius, fillCircle) {
+			ctx.beginPath();
+			ctx.arc(x, y, radius, 0, Math.PI * 2, false);
+			if (fillCircle) {
+				ctx.fill()
+			} else {
+				ctx.stroke()
+			}
+		}
+
+		// draw bee
+		function drawBee(x, y) {
+			ctx.lineWidth = 2;
+			ctx.strokeStyle = 'Black';
+			ctx.fillStyle = 'Gold';
+
+			circle(x, y, 8, true);
+			circle(x, y, 8, false);
+			circle(x - 5, y - 11, 5, false);
+			circle(x + 5, y - 11, 5, false);
+			circle(x - 2, y - 1, 2, false);
+			circle(x + 2, y - 1, 2, false);
+		}
+
+		// update location of bee
+		function update(coordinate) {
+			var offset = Math.random() * 4 - 2;
+			coordinate += offset;
+
+			if (coordinate > 200) {
+				coordinate = 200;
+			}
+			if (coordinate < 0) {
+				coordinate = 0;
+			}
+
+			// return it 4 later using
+			return coordinate;
+		}
+
+		var canvas = document.getElementById('canvas');
+		var ctx = canvas.getContext('2d');
+
+		var x = 100;
+		var y = 100;
+
+		setInterval(function () {
+			ctx.clearRect(0, 0, 200, 200);
+			drawBee(x, y);
+			// here return var coordinates
+			x = update(x);
+			y = update(y);
+
+			ctx.strokeRect(0, 0, 200, 200);
+		}, 30);
+	</script>
+</body>
+
+</html>

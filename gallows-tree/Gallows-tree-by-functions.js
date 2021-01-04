@@ -68,6 +68,47 @@ function showAnswerAndCongratulatePlayer(answerArray) {
 	alert("Good job! the answer was " + word);
 };
 
+function drawLose(counterLose) {
+	ctx.lineWidth = 5;
+	switch (counterLose) {
+		case 5:
+			// head
+			ctx.strokeRect(80, 10, 40, 40);
+			ctx.beginPath();
+			break;
+		case 4:
+			// body
+			ctx.moveTo(100, 50);
+			ctx.lineTo(100, 130);
+			ctx.stroke();
+			break;
+		case 3:
+			// left leg
+			ctx.moveTo(100, 130);
+			ctx.lineTo(60, 180);
+			ctx.stroke();
+			break;
+		case 2:
+			// right leg
+			ctx.moveTo(100, 130);
+			ctx.lineTo(140, 180);
+			ctx.stroke();
+			break;
+		case 1:
+			// left hand
+			ctx.moveTo(60, 50);
+			ctx.lineTo(100, 80);
+			ctx.stroke();
+			break;
+		case 0:
+			// right hand
+			ctx.moveTo(140, 50);
+			ctx.lineTo(100, 80);
+			ctx.stroke();
+			break;
+	}
+}
+
 // Condition of task
 var word = pickWord();
 var answerArray = setupAnswerArray(word);

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Canvas_Ihor</title>
+
+	<style>
+		body {
+			width: 200px;
+			margin: 0 auto;
+		}
+
+		h2 {
+			text-align: center;
+			margin: 0;
+			padding: 0;
+		}
+
+		canvas {
+			margin: 100px auto;
+		}
+
+		#canvas1,
+		#canvas2 {
+			margin: 0 auto;
+		}
+	</style>
+</head>
+
+<body>
+	<h2>move mouse <br>left & right</h2>
+	<canvas id="canvas" width="200" height="200"></canvas>
+	<canvas id="canvas1" width="200" height="100"></canvas>
+	<canvas id="canvas2" width="200" height="50"></canvas>
+
+	<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+	<script>
+
+		var canvas = document.getElementById('canvas');
+		var ctx = canvas.getContext('2d');
+
+		// for (let i = 0; i < 8; i++) {
+		// 	ctx.fillRect(i * 10, i * 10, 10, 10);
+		// }
+
+		// color
+		ctx.fillStyle = 'Violet';
+		// man
+		// draw rectagle with fill in color
+		ctx.fillRect(75, 0, 50, 50);
+		ctx.fillRect(95, 50, 10, 20);
+		ctx.fillRect(30, 70, 140, 10);
+		ctx.fillRect(65, 80, 70, 70);
+		ctx.fillRect(65, 150, 10, 50);
+		ctx.fillRect(65 + 60, 150, 10, 50);
+
+		// moving of men(falling)
+		$('html').mousemove(function (e) {
+			$('#canvas').css({
+				transform: 'rotate(' + e.pageX + 'deg) scale(' + e.pageX / 550 + ')',
+			})
+		})
+
+		var canvas1 = document.getElementById('canvas1');
+		var ctx1 = canvas1.getContext('2d');
+
+		ctx1.fillStyle = 'Cyan';
+		ctx1.fillRect(0, 0, 50, 100);
+		ctx1.fillStyle = 'Crimson';
+		ctx1.fillRect(50, 0, 50, 100);
+		ctx1.fillStyle = 'Coral';
+		ctx1.fillRect(100, 0, 50, 100);
+		ctx1.fillStyle = 'DarkViolet';
+		ctx1.fillRect(150, 0, 50, 100);
+
+		var canvas2 = document.getElementById('canvas2');
+		var ctx2 = canvas2.getContext('2d');
+
+		// color of outline
+		ctx2.strokeStyle = 'DeepPink';
+		// set width of outline
+		ctx2.lineWidth = 10;
+		// draw onlu stroke(outline) of rectangle
+		ctx2.strokeRect(0, 0, 200, 50);
+
+	</script>
+</body>
+
+</html>
