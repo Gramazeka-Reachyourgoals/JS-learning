@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Snake v.1.0</title>
+
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+		}
+
+		body {
+			width: 100vw;
+			height: 100vh;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+
+		canvas {
+			display: block;
+		}
+	</style>
+</head>
+
+<body>
+	<canvas id="canvas" width="400" height="400"></canvas>
+
+	<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+	<script>
+
+		var canvas = document.getElementById('canvas');
+		var ctx = canvas.getContext('2d');
+
+		// allow use parameter from html, so if you want to change
+		// size of canvas, u can change it only in html
+		var width = canvas.width;
+		var height = canvas.height;
+
+		// we create blocks 10x10pixels
+		var blockSize = 10;
+		// count of countitity blocks in width of canvas
+		var widthInBlocks = width / blockSize;
+		// count of countitity blocks in height of canvas
+		var heightInBlocks = height / blockSize;
+		// when snake eats apple +1
+		var score = 0;
+
+		function drawBorder() {
+			ctx.fillStyle = 'DarkOrchid';
+			// x,y,width of rect, height of rect
+			ctx.fillRect(0, 0, width, blockSize);
+			ctx.fillRect(0, 0, blockSize, height);
+			ctx.fillRect(0, height - blockSize, width, blockSize);
+			ctx.fillRect(width - blockSize, 0, blockSize, height);
+		}
+
+		function drawScore() {
+			// set font-size and font-family
+			ctx.font = '22px Comic Sans MS';
+			ctx.fillStyle = 'black';
+			// default=left
+			ctx.textAlign = 'left';
+			// vertical align of text, change baseline
+			ctx.textBaseline = 'top';
+			// write phrase at x, y coordinates
+			ctx.fillText('Score: ' + score, blockSize + 5, blockSize + 7);
+		}
+
+		function gameOver() {
+			// clearInterval(intervalId);
+			ctx.font = '60px Comic Sans MS';
+			ctx.fontStyle = 'black';
+			ctx.textAlign = 'center';
+			ctx.textBaseline = 'middle';
+			ctx.fillText('Game Over', width / 2, height / 2);
+		}
+
+		setInterval(function () {
+			ctx.clearRect(0, 0, width, height);
+			drawBorder();
+			drawScore();
+			score++;
+		}, 100)
+		// gameOver();
+
+		// var intervalId = setInterval(function () {
+		// 	ctx.clearRect(0, 0, width, height);
+		// 	drawScore();
+		// 	snake.move();
+		// 	snake.draw();
+		// 	apple.draw();
+		// 	drawBorder();
+		// }, 100)
+
+	</script>
+</body>
+
+</html>

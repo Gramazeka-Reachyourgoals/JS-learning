@@ -9,14 +9,19 @@
 </head>
 
 <body>
-	<canvas id="canvas" width="200" height="200"></canvas>
+	<canvas id="canvas" width="500" height="300"></canvas>
 	<h1>Gallows-tree game + Canvas</h1><br>
-	<h2>v.1.1</h2>
+	<h2>v.1.2</h2>
 
 	<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 	<script>
 		var canvas = document.getElementById('canvas');
 		var ctx = canvas.getContext('2d');
+
+		// allow use parameter from html, so if you want to change
+		// size of canvas, u can change it only in html
+		var width = canvas.width;
+		var height = canvas.height;
 
 		// create arrays with some words
 		var words = [
@@ -51,10 +56,48 @@
 		$(document).ready(function () {
 
 			// Gaming loop
-			while (remainingLetters > 0 && counterLose > 0) {
+			while (remainingLetters > 0 && counterLose >= 0) {
 				// Shows progress to player
-				alert("WORD (" + word.length + "X)" + " - " + answerArray.join(" ") + "\nNumber of mistakes : " +
-					counterLose);
+				alert("WORD (" + word.length + "X)" + " - " + answerArray.join(" ") + "\nNumber of mistakes : " + counterLose);
+
+				// draw guessing letters on canvas
+				var wordLength = word.length;
+				function drawUnderLetters(wordLength) {
+					let k = 0;
+					for (let i = 0; i < wordLength; i++) {
+						ctx.fillRect(55 + i * 30 + k, height - 40, 30, 5);
+						k += 10;
+					}
+				}
+				drawUnderLetters(wordLength);
+
+				// draw guessed letter
+				function drawLetter(guess) {
+					let k = 0;
+					for (let i = 0; i < word.length; i++) {
+						if (guess === word[i]) {
+							ctx.font = '30px Comic Sans MS';
+							ctx.textAlign = 'center';
+							ctx.textBaseline = 'middle';
+							ctx.fillText(guess.toUpperCase(), 70 + i * 30 + k, height - 55);
+						}
+						k += 10;
+					}
+				}
+
+				// draw croosed out wrong guess letters
+				function failLetter(guess, counterLose) {
+					ctx.font = '30px Comic Sans MS';
+					ctx.textAlign = 'center';
+					ctx.textBaseline = 'middle';
+					ctx.fillText(guess.toUpperCase(), width - 70, 70 + counterLose * 30);
+					// cross out
+					ctx.lineWidth = 3;
+					ctx.beginPath();
+					ctx.moveTo(width - 85, 65 + counterLose * 30);
+					ctx.lineTo(width - 55, 65 + counterLose * 30);
+					ctx.stroke();
+				}
 
 				// Get guess from player
 				var guess = prompt("Guess a letter, or click Cancel(Отмена) to stop playing.").toLowerCase();
@@ -74,6 +117,7 @@
 								answerArray[j] = guess;
 								remainingLetters--;
 							}
+							drawLetter(guess);
 							i++;
 						}
 						drawLose(counterLose);
@@ -81,9 +125,11 @@
 					// Add system of only 5 lifes
 					if (i == 0) {
 						counterLose--;
+						failLetter(guess, counterLose);
 						drawLose(counterLose);
 					}
-					if (counterLose == 0) {
+					if (counterLose < 0) {
+						drawLose(counterLose);
 						alert("You lose!");
 					}
 				}
@@ -129,6 +175,15 @@
 						// right hand
 						ctx.moveTo(140, 50);
 						ctx.lineTo(100, 80);
+						ctx.stroke();
+						break;
+					case -1:
+						// cross on the face
+						ctx.strokeRect(80, 10, 40, 40);
+						ctx.moveTo(90, 20);
+						ctx.lineTo(110, 40);
+						ctx.moveTo(110, 20);
+						ctx.lineTo(90, 40);
 						ctx.stroke();
 						break;
 				}
