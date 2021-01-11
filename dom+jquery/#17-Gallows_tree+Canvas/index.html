@@ -28,7 +28,7 @@
 			"body",
 			"screen",
 			"table",
-			"shark",
+			// "shark",
 			"orange",
 			"pineapple",
 			"plum",
@@ -36,6 +36,15 @@
 			"meat",
 			"sky",
 			"marshmello",
+			'strawberry',
+			'banana',
+			'apricot',
+			'peach',
+			'cherry',
+			'melon',
+			'watermelon',
+			'lemon',
+			'lime'
 		];
 
 		// get from words[] some element(word) => word
@@ -142,12 +151,15 @@
 			function drawLose(counterLose) {
 				ctx.lineWidth = 5;
 				switch (counterLose) {
-					case 5:
+					// case 5:
+					// 	// head
+					// 	ctx.strokeRect(80, 10, 40, 40);
+					// 	ctx.beginPath();
+					// 	break;
+					case 4:
 						// head
 						ctx.strokeRect(80, 10, 40, 40);
 						ctx.beginPath();
-						break;
-					case 4:
 						// body
 						ctx.moveTo(100, 50);
 						ctx.lineTo(100, 130);
