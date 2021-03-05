@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>POST</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+		}
+
+		body {
+			width: 100vw;
+			height: 100vh;
+			background: orange;
+		}
+
+		div {
+			margin: 10px;
+		}
+	</style>
+</head>
+
+<body>
+	<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+	<script>
+
+		const requestURL = 'https://jsonplaceholder.typicode.com/users';
+
+		const headers = {
+			'Content-Type': 'application/json'
+		}
+
+		// wrap into promise, return promise
+		// use 4 asynchronous code
+		function sendRequest(method, url, body = null) {
+			return fetch(url, {
+				method: method,
+				body: JSON.stringify(body),
+				headers: headers
+			}).then(response => {
+				// check errors
+				// same as (response.status >= 400)
+				if (response.ok) {
+					return response.json()
+				}
+
+				// our custom error
+				return response.json().then(error => {
+					const e = new Error('Something goes wrong')
+					e.data = error
+					throw e
+				})
+			})
+		}
+
+		const body = {
+			name: 'Ihor',
+			age: 23
+		}
+
+		sendRequest('POST', requestURL, body)
+			.then(data => console.log(data))
+			.catch(err => console.log(err))
+
+	</script>
+</body>
+
+</html>

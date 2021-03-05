@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>POST</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+		}
+
+		body {
+			width: 100vw;
+			height: 100vh;
+			background: orange;
+		}
+
+		div {
+			margin: 10px;
+		}
+	</style>
+</head>
+
+<body>
+	<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+	<script>
+
+		const requestURL = 'https://jsonplaceholder.typicode.com/users';
+
+		const body = {
+			name: 'Ihor',
+			age: 23
+		}
+
+		const xhr = new XMLHttpRequest();
+
+		xhr.open('POST', requestURL);
+
+		xhr.responseType = 'json';
+		xhr.setRequestHeader('Content-Type', 'application/json')
+
+
+		xhr.onload = () => {
+			if (xhr.status >= 400) {
+				// error
+				console.log(xhr.response);
+			} else {
+				// if everything good
+				console.log(xhr.response);
+			}
+		}
+
+		xhr.onerror = () => {
+			console.log(xhr.response);
+		}
+
+		// send only string
+		xhr.send(JSON.stringify(body))
+
+	</script>
+</body>
+
+</html>

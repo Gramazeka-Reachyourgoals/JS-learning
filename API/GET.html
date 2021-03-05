@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>GET</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+		}
+
+		body {
+			width: 100vw;
+			height: 100vh;
+			background: orange;
+		}
+
+		div {
+			margin: 10px;
+		}
+	</style>
+</head>
+
+<body>
+	<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+	<script>
+
+		//JSON
+		const requestURL = 'http://api.openweathermap.org/data/2.5/weather?q=Chernivtsi&appid=7775776bbb22fe5346226c8c8f65ac37&units=metric';
+
+		const xhr = new XMLHttpRequest();
+
+		xhr.open('GET', requestURL);
+
+		xhr.responseType = 'json';
+		// alternative
+		// console.log(JSON.parse(xhr.response));
+
+
+		xhr.onload = () => {
+			if (xhr.status >= 400) {
+				// error
+				console.error(xhr.response);
+			} else {
+				// if everything good
+				console.log(xhr.response);
+				$('script:first-of-type').before('<div>' + xhr.response.main.temp + '</div>');
+				$('script:first-of-type').before('<div>' + xhr.response.main.humidity + '</div>');
+			}
+		}
+
+		xhr.onerror = () => {
+			console.log(xhr.response);
+		}
+
+		xhr.send()
+
+	</script>
+</body>
+
+</html>

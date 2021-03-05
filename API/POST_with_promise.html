@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>POST</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+		}
+
+		body {
+			width: 100vw;
+			height: 100vh;
+			background: orange;
+		}
+
+		div {
+			margin: 10px;
+		}
+	</style>
+</head>
+
+<body>
+	<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+	<script>
+
+		const requestURL = 'https://jsonplaceholder.typicode.com/users';
+
+		// wrap into promise, return promise
+		// use 4 asynchronous code
+		function sendRequest(method, url, body = null) {
+			return new Promise((resolve, reject) => {
+
+				const xhr = new XMLHttpRequest();
+
+				xhr.open(method, url);
+
+				xhr.responseType = 'json';
+				xhr.setRequestHeader('Content-Type', 'application/json')
+
+
+				xhr.onload = () => {
+					if (xhr.status >= 400) {
+						// error
+						reject(xhr.response);
+					} else {
+						// if everything good
+						resolve(xhr.response);
+					}
+				}
+
+				xhr.onerror = () => {
+					reject(xhr.response);
+				}
+
+				// send only string
+				xhr.send(JSON.stringify(body))
+			});
+		}
+
+		const body = {
+			name: 'Ihor',
+			age: 23
+		}
+
+		sendRequest('POST', requestURL, body)
+			.then(data => console.log(data))
+			.catch(err => console.log(err))
+
+		// sendRequest('GET', requestURL)
+		// 	// зачейнить, получить data
+		// 	.then(data => console.log(data))
+		// 	// handle error
+		// 	.catch(err => console.log(err))
+
+	</script>
+</body>
+
+</html>
